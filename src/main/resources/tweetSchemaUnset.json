@@ -1,0 +1,117 @@
+{
+  "truncated": "",
+  "in_reply_to_screen_name": "",
+  "user": {
+    "location": "",
+    "translator_type": "",
+    "protected": "",
+    "utc_offset": "",
+    "time_zone": "",
+    "geo_enabled": "",
+    "contributors_enabled": "",
+    "is_translator": "",
+    "profile_background_color": "",
+    "profile_background_image_url": "",
+    "profile_background_image_url_https": "",
+    "profile_background_tile": "",
+    "profile_link_color": "",
+    "profile_sidebar_border_color": "",
+    "profile_sidebar_fill_color": "",
+    "profile_text_color": "",
+    "profile_use_background_image": "",
+    "profile_image_url": "",
+    "profile_image_url_https": "",
+    "default_profile": "",
+    "default_profile_image": "",
+    "following": "",
+    "follow_request_sent": "",
+    "notifications": "",
+    "withheld_in_countries": ""
+  },
+  "geo": "",
+  "coordinates": "",
+  "place": "",
+  "contributors": "",
+  "retweeted_status": {
+    "screen_name": "",
+    "location": "",
+    "translator_type": "",
+    "protected": "",
+    "created_at": "",
+    "utc_offset": "",
+    "time_zone": "",
+    "geo_enabled": "",
+    "contributors_enabled": "",
+    "is_translator": "",
+    "profile_background_color": "",
+    "profile_background_image_url": "",
+    "profile_background_image_url_https": "",
+    "profile_background_tile": "",
+    "profile_link_color": "",
+    "profile_sidebar_border_color": "",
+    "profile_sidebar_fill_color": "",
+    "profile_text_color": "",
+    "profile_use_background_image": "",
+    "profile_image_url": "",
+    "profile_image_url_https": "",
+    "profile_banner_url": "",
+    "default_profile": "",
+    "default_profile_image": "",
+    "following": "",
+    "follow_request_sent": "",
+    "notifications": "",
+    "withheld_in_countries": ""
+  },
+  "geo": "",
+  "coordinates": "",
+  "place": "",
+  "contributors": "",
+  "entities": {
+    "sizes": {
+      "thumb": {
+        "w": "",
+        "h": "",
+        "resize": ""
+      },
+      "large": {
+        "w": "",
+        "h": "",
+        "resize": ""
+      },
+      "small": {
+        "w": "",
+        "h": "",
+        "resize": ""
+      },
+      "medium": {
+        "w": "",
+        "h": "",
+        "resize": ""
+      }
+    },
+    "extended_entities": {
+      "sizes": {
+        "thumb": {
+          "w": "",
+          "h": "",
+          "resize": ""
+        },
+        "large": {
+          "w": "",
+          "h": "",
+          "resize": ""
+        },
+        "small": {
+          "w": "",
+          "h": "",
+          "resize": ""
+        },
+        "medium": {
+          "w": "",
+          "h": "",
+          "resize": ""
+        }
+      }
+    }
+  }
+}
