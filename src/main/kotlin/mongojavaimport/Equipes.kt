@@ -26,5 +26,9 @@ enum class Equipes {
     LAKERS,
     HEAT,
     WARRIORS,
-    TIMBERWOLVES
+    TIMBERWOLVES;
+
+    companion object {
+        val anyTeamRegex = Equipes.values().joinToString(separator = "|") { "[\\s|#]+$it[\\s\\.,]" }.toRegex(RegexOption.IGNORE_CASE).toPattern()
+    }
 }
