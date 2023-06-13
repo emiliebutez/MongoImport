@@ -1,6 +1,9 @@
 package mongojavaimport
 
 import org.bson.types.ObjectId
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 //import com.fasterxml.jackson.annotation.JsonInclude
 //import com.fasterxml.jackson.annotation.JsonProperty
@@ -73,8 +76,25 @@ data class Tweet(
     val retweet_count: Int,
     val favorite_count: Int,
     val entities: Entities,
-    val lang: String? = null
+    val lang: String? = null,
+    val hour: String? = getHour(created_at),
+    val date: String? = null,
+    val sentiment: Sentiments? = Sentiments.NEUTRE
 )
+
+fun getHour(date: String) : String {
+    val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH)
+    val date = dateFormat.parse(date)
+    val hourFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+    return hourFormat.format(date)
+}
+
+fun getDate(date: String) : String {
+    val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH)
+    val date = dateFormat.parse(date)
+    val dayFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+    return dayFormat.format(date)
+}
 
 data class FilteredUser(
     val id: Long,
@@ -119,11 +139,17 @@ data class FilteredRetweetedStatus(
 )
 
 data class Entities(
-    val hashtags: List<Any>, // Empty list in the provided data
+    val hashtags: List<Hashtag>, // Empty list in the provided data
     val urls: List<Any>, // Empty list in the provided data
     val user_mentions: List<UserMention>,
     val symbols: List<Any>, // Empty list in the provided data
     val media: List<Media> = emptyList(),
+)
+
+//
+data class Hashtag(
+    val indices: List<Int>,
+    val text: String
 )
 
 data class UserMention(
