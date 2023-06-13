@@ -5,58 +5,6 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-//import com.fasterxml.jackson.annotation.JsonInclude
-//import com.fasterxml.jackson.annotation.JsonProperty
-//import com.fasterxml.jackson.annotation.JsonPropertyOrder
-//import org.bson.types.ObjectId
-//
-//@JsonInclude(JsonInclude.Include.NON_NULL)
-//data class Tweet(
-//    @JsonProperty("_id")
-//    val id: ObjectId = ObjectId.get(),
-//    @JsonProperty("id")
-//    val tweetId: Long,
-//    @JsonProperty("created_at")
-//    val createdAt: String,
-//    @JsonProperty("id_str")
-//    val idStr: String,
-//    @JsonProperty("text")
-//    val text: String,
-//    @JsonProperty("source")
-//    val source: String,
-//    @JsonProperty("in_reply_to_status_id")
-//    val inReplyToStatusId: String? = null,
-//    @JsonProperty("in_reply_to_status_id_str")
-//    val inReplyToStatusIdStr: String? = null,
-//    @JsonProperty("in_reply_to_user_id")
-//    val inReplyToUserId: String? = null,
-//    @JsonProperty("in_reply_to_user_id_str")
-//    val inReplyToUserIdStr: String? = null,
-//    @JsonProperty("is_quote_status")
-//    val isQuoteStatus: Boolean,
-//    @JsonProperty("quote_count")
-//    val quoteCount: Int,
-//    @JsonProperty("reply_count")
-//    val replyCount: Int,
-//    @JsonProperty("retweet_count")
-//    val retweetCount: Int,
-//    @JsonProperty("favorite_count")
-//    val favoriteCount: Int,
-//    @JsonProperty("favorited")
-//    val favorited: Boolean,
-//    @JsonProperty("retweeted")
-//    val retweeted: Boolean,
-//    @JsonProperty("possibly_sensitive")
-//    val possiblySensitive: Boolean,
-//    @JsonProperty("filter_level")
-//    val filterLevel: String,
-//    @JsonProperty("lang")
-//    val lang: String,
-//    @JsonProperty("timestamp_ms")
-//    val timestampMs: String
-//)
-
-
 data class Tweet(
     val _id: ObjectId = ObjectId.get(),
     val created_at: String,
@@ -78,8 +26,9 @@ data class Tweet(
     val entities: Entities,
     val lang: String? = null,
     val hour: String? = getHour(created_at),
-    val date: String? = null,
-    val sentiment: Sentiments? = Sentiments.NEUTRE
+    val date: String? = getDate(created_at),
+    val sentiment: Sentiments? = Sentiments.NEUTRE,
+    val equipes: List<String>? = getEquipe(text),
 )
 
 fun getHour(date: String) : String {
@@ -94,6 +43,11 @@ fun getDate(date: String) : String {
     val date = dateFormat.parse(date)
     val dayFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
     return dayFormat.format(date)
+}
+
+fun getEquipe(textTweet: String): List<String> {
+    val equipes = Equipes.values().map { it.name }
+    return equipes.filter { textTweet.contains(it, ignoreCase = true) }
 }
 
 data class FilteredUser(
@@ -111,6 +65,7 @@ data class FilteredUser(
     val statuses_count: Int,
     val created_at: String,
     val lang: Any?, // null in the provided data
+    val date: String? = getDate(created_at),
 )
 
 data class FilteredRetweetedStatus(
@@ -136,6 +91,8 @@ data class FilteredRetweetedStatus(
     val possibly_sensitive: Boolean,
     val filter_level: String,
     val lang: String,
+    val hour: String? = getHour(created_at),
+    val date: String? = getDate(created_at),
 )
 
 data class Entities(
