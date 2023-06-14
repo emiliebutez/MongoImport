@@ -27,7 +27,7 @@ data class Tweet(
     val lang: String? = null,
     val hour: String? = getHour(created_at),
     val date: String? = getDate(created_at),
-    val sentiment: Sentiments? = Sentiments.NEUTRE,
+    val sentiment: String? = null,
     val equipes: List<String>? = getEquipe(text),
 )
 
