@@ -13,8 +13,8 @@ class MongoLoader {
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         .registerKotlinModule()
     private val client = MongoClients.create("mongodb://localhost:27017")
-    val database = client.getDatabase("tweetsFilteredV5");
-    val coll = database.getCollection("tweetsFilteredV5");
+    val database = client.getDatabase("tweetsDL");
+    val coll = database.getCollection("tweetsDL");
 
     fun filterProperties(json: String): Tweet {
         return objectMapper.readValue(json, Tweet::class.java)

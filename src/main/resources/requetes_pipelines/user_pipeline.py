@@ -4,7 +4,7 @@ from pymongo import MongoClient
 # https://api.mongodb.com/python/current
 
 client = MongoClient('mongodb://localhost:27017/')
-result = client['tweetsFilteredV5']['tweetsFilteredV5'].aggregate([
+result = client['tweetsDL']['tweetsDL'].aggregate([
     {
         '$project': {
             '_id': 0, 
@@ -18,7 +18,7 @@ result = client['tweetsFilteredV5']['tweetsFilteredV5'].aggregate([
         }
     }, {
         '$out': {
-            'db': 'tweetsFilteredV5',
+            'db': 'tweets',
             'coll': 'user_tweet'
         }
     }
