@@ -1,7 +1,7 @@
 package mongojavaimport
 
+import mongojavaimport.sentiments.Sentiment
 import org.bson.types.ObjectId
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,10 +27,16 @@ data class Tweet(
     val lang: String? = null,
     val hour: String? = getHour(created_at),
     val date: String? = getDate(created_at),
-    val sentiment: Sentiments? = Sentiments.NEUTRE,
+    var sentiment: Sentiment? = null,
     val equipes: List<String>? = getEquipe(text),
 )
 
+/**
+ * Get the hour of the string.
+ *
+ * @param date The string contains the hour.
+ * @return The hour of the string.
+ */
 fun getHour(date: String) : String {
     val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH)
     val date = dateFormat.parse(date)
@@ -38,6 +44,12 @@ fun getHour(date: String) : String {
     return hourFormat.format(date)
 }
 
+/**
+ * Get the date of the string.
+ *
+ * @param date The string contains date.
+ * @return The date of the string.
+ */
 fun getDate(date: String) : String {
     val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH)
     val date = dateFormat.parse(date)
@@ -45,6 +57,12 @@ fun getDate(date: String) : String {
     return dayFormat.format(date)
 }
 
+/**
+ * Get the equipes by the tweet text.
+ *
+ * @param textTweet The tweet text.
+ * @return A list of equipe by the tweet text.
+ */
 fun getEquipe(textTweet: String): List<String> {
     val equipes = Equipes.values().map { it.name }
     return equipes.filter { textTweet.contains(it, ignoreCase = true) }
@@ -103,7 +121,6 @@ data class Entities(
     val media: List<Media> = emptyList(),
 )
 
-//
 data class Hashtag(
     val indices: List<Int>,
     val text: String

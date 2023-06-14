@@ -1,5 +1,7 @@
 package mongojavaimport
 
+import mongojavaimport.sentiments.SentimentsAnalyzer
+import mongojavaimport.sentiments.SentimentsAnalyzer.Companion.useSentimentsAnalyzer
 import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -9,9 +11,11 @@ fun main() {
     val files = targetDirectory.listFiles { file -> file.extension == "json" }.toList()
     val index = AtomicInteger(0)
 
-    files.parallelStream().forEach { file ->
-        loader.loadJsonIntoDb(file)
-        println("File treated: ${index.incrementAndGet()} / ${files.size}")
+    useSentimentsAnalyzer { analyzer ->
+        files.parallelStream().forEach { file ->
+            loader.loadJsonIntoDb(file, sentimentsAnalyzer = analyzer)
+            println("File treated: ${index.incrementAndGet()} / ${files.size}")
+        }
     }
 
     println("ok")
