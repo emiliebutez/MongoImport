@@ -9,7 +9,7 @@ collection = db.tweetsFilteredV5
 
 sentiments = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
 
-documents = collection.find()
+documents = collection.find({"sentiment": {"$eq": None}})
 index = 0
 total_documents = collection.count_documents({})
 
