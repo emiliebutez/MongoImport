@@ -19,7 +19,7 @@ fun main() {
 
     println("All file treated.")
 
-    val process = ProcessBuilder("python", "../resources/sentiment-analyzer.py")
+    val process = ProcessBuilder("python", "src/main/resources/sentiment-analyzer.py")
     .redirectErrorStream(true)
         .start()
 
