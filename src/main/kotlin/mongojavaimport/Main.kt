@@ -1,6 +1,9 @@
 package mongojavaimport
 
 import java.io.File
+import java.io.BufferedReader
+import java.io.InputStreamReader
+
 import java.util.concurrent.atomic.AtomicInteger
 
 fun main() {
@@ -14,5 +17,18 @@ fun main() {
         println("File treated: ${index.incrementAndGet()} / ${files.size}")
     }
 
-    println("ok")
+    println("All file treated.")
+
+    val process = ProcessBuilder("python", "../resources/sentiment-analyzer.py")
+    .redirectErrorStream(true)
+        .start()
+
+    val reader = BufferedReader(InputStreamReader(process.inputStream))
+    var line: String?
+    while (reader.readLine().also { line = it } != null) {
+        println(line)
+    }
+
+    val exitCode = process.waitFor()
+    println("Python sentiment anlayzer script execution completed. Exit code: $exitCode")
 }

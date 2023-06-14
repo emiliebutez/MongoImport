@@ -4,8 +4,8 @@ from pymongo import MongoClient
 
 client = MongoClient('mongodb://localhost:27017/')
 
-db = client.tweetsFilteredV4
-collection = db.tweetsFilteredV4
+db = client.tweetsFilteredV5
+collection = db.tweetsFilteredV5
 
 sentiments = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
 
