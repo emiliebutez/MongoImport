@@ -12,15 +12,25 @@ fun main() {
     val files = targetDirectory.listFiles { file -> file.extension == "json" }.toList()
     val index = AtomicInteger(0)
 
+    processFiles(loader, files, index)
+
+    executeSentimentAnalyzer()
+
+    executePythonScriptsInDirectory("src/main/resources/requetes_pipelines")
+}
+
+fun processFiles(loader: MongoLoader, files: List<File>, index: AtomicInteger) {
     files.parallelStream().forEach { file ->
         loader.loadJsonIntoDb(file)
         println("File treated: ${index.incrementAndGet()} / ${files.size}")
     }
 
-    println("All file treated.")
+    println("All files treated.")
+}
 
+fun executeSentimentAnalyzer() {
     val process = ProcessBuilder("python", "src/main/resources/sentiment-analyzer.py")
-    .redirectErrorStream(true)
+        .redirectErrorStream(true)
         .start()
 
     val reader = BufferedReader(InputStreamReader(process.inputStream))
@@ -30,9 +40,11 @@ fun main() {
     }
 
     val exitCode = process.waitFor()
-    println("Python sentiment anlayzer script execution completed. Exit code: $exitCode")
+    println("Python sentiment analyzer script execution completed. Exit code: $exitCode")
+}
 
-    val directory = File("src/main/resources/requetes_pipelines")
+fun executePythonScriptsInDirectory(directoryPath: String) {
+    val directory = File(directoryPath)
 
     if (directory.isDirectory) {
         val pythonScripts = directory.listFiles { file -> file.isFile && file.extension == "py" }
