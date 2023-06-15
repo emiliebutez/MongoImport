@@ -98,30 +98,30 @@ data class FilteredUser(
 /**
  * Represents a filtered retweeted status object.
  *
- * @property created_at The creation date of the retweeted status
- * @property id The unique ID of the retweeted status
- * @property id_str The string representation of the retweeted status ID
- * @property text The content of the retweeted status
- * @property display_text_range The range of the display text, if available
- * @property source The source of the retweeted status
- * @property in_reply_to_status_id The ID of the tweet this retweeted status is replying to, if any
- * @property in_reply_to_status_id_str The string representation of the ID of the tweet this retweeted status is replying to, if any
- * @property in_reply_to_user_id The ID of the user this retweeted status is replying to, if any
- * @property in_reply_to_user_id_str The string representation of the ID of the user this retweeted status is replying to, if any
- * @property user The user who posted the retweeted status
- * @property is_quote_status Indicates if the retweeted status is a quote status
- * @property quote_count The number of times the retweeted status has been quoted
- * @property reply_count The number of replies to the retweeted status
- * @property retweet_count The number of retweets for the retweeted status
- * @property favorite_count The number of times the retweeted status has been favorited
- * @property entities The entities (hashtags, URLs, mentions, etc.) present in the retweeted status
- * @property favorited Indicates if the retweeted status has been favorited
- * @property retweeted Indicates if the retweeted status has been retweeted
- * @property possibly_sensitive Indicates if the retweeted status may contain sensitive content
- * @property filter_level The filter level applied to the retweeted status
- * @property lang The language of the retweeted status
- * @property hour The hour of the retweeted status' creation time
- * @property date The date of the retweeted status' creation time
+ * @property created_at The creation date of the retweeted status.
+ * @property id The unique ID of the retweeted status.
+ * @property id_str The string representation of the retweeted status ID.
+ * @property text The content of the retweeted status.
+ * @property display_text_range The range of the display text, if available.
+ * @property source The source of the retweeted status.
+ * @property in_reply_to_status_id The ID of the tweet this retweeted status is replying to, if any.
+ * @property in_reply_to_status_id_str The string representation of the ID of the tweet this retweeted status is replying to, if any.
+ * @property in_reply_to_user_id The ID of the user this retweeted status is replying to, if any.
+ * @property in_reply_to_user_id_str The string representation of the ID of the user this retweeted status is replying to, if any.
+ * @property user The user who posted the retweeted status.
+ * @property is_quote_status Indicates if the retweeted status is a quote status.
+ * @property quote_count The number of times the retweeted status has been quoted.
+ * @property reply_count The number of replies to the retweeted status.
+ * @property retweet_count The number of retweets for the retweeted status.
+ * @property favorite_count The number of times the retweeted status has been favorited.
+ * @property entities The entities (hashtags, URLs, mentions, etc.) present in the retweeted status.
+ * @property favorited Indicates if the retweeted status has been favorited.
+ * @property retweeted Indicates if the retweeted status has been retweeted.
+ * @property possibly_sensitive Indicates if the retweeted status may contain sensitive content.
+ * @property filter_level The filter level applied to the retweeted status.
+ * @property lang The language of the retweeted status.
+ * @property hour The hour of the retweeted status' creation time.
+ * @property date The date of the retweeted status' creation time.
  */
 data class FilteredRetweetedStatus(
     val created_at: String,
@@ -153,11 +153,11 @@ data class FilteredRetweetedStatus(
 /**
  * Represents an entities object.
  *
- * @property hashtags The list of hashtags present in the tweet
- * @property urls The list of URLs present in the tweet
- * @property user_mentions The list of user mentions present in the tweet
- * @property symbols The list of symbols present in the tweet
- * @property media The list of media (images, videos, etc.) present in the tweet
+ * @property hashtags The list of hashtags present in the tweet.
+ * @property urls The list of URLs present in the tweet.
+ * @property user_mentions The list of user mentions present in the tweet.
+ * @property symbols The list of symbols present in the tweet.
+ * @property media The list of media (images, videos, etc.) present in the tweet.
  */
 data class Entities(
     val hashtags: List<Hashtag>,
@@ -170,8 +170,8 @@ data class Entities(
 /**
  * Represents a hashtag object.
  *
- * @property indices The character indices where the hashtag appears in the tweet
- * @property text The text of the hashtag
+ * @property indices The character indices where the hashtag appears in the tweet.
+ * @property text The text of the hashtag.
  */
 data class Hashtag(
     val indices: List<Int>,
@@ -181,11 +181,11 @@ data class Hashtag(
 /**
  * Represents a user mention object.
  *
- * @property screen_name The screen name/handle of the mentioned user
- * @property name The name of the mentioned user
- * @property id The unique ID of the mentioned user
- * @property id_str The string representation of the mentioned user ID
- * @property indices The character indices where the user mention appears in the tweet
+ * @property screen_name The screen name/handle of the mentioned user.
+ * @property name The name of the mentioned user.
+ * @property id The unique ID of the mentioned user.
+ * @property id_str The string representation of the mentioned user ID.
+ * @property indices The character indices where the user mention appears in the tweet.
  */
 data class UserMention(
     val screen_name: String? = null,
@@ -198,15 +198,15 @@ data class UserMention(
 /**
  * Represents a media object.
  *
- * @property id The unique ID of the media
- * @property id_str The string representation of the media ID
- * @property indices The character indices where the media appears in the tweet
- * @property media_url The URL of the media
- * @property media_url_https The HTTPS URL of the media
- * @property url The displayed URL of the media
- * @property display_url The displayed URL of the media with formatting
- * @property expanded_url The expanded version of the displayed URL
- * @property type The type of the media (e.g., photo, video)
+ * @property id The unique ID of the media.
+ * @property id_str The string representation of the media ID.
+ * @property indices The character indices where the media appears in the tweet.
+ * @property media_url The URL of the media.
+ * @property media_url_https The HTTPS URL of the media.
+ * @property url The displayed URL of the media.
+ * @property display_url The displayed URL of the media with formatting.
+ * @property expanded_url The expanded version of the displayed URL.
+ * @property type The type of the media (e.g., photo, video).
  */
 data class Media(
     val id: Long,
@@ -223,8 +223,8 @@ data class Media(
 /**
  * Retrieves the hour from a given date string.
  *
- * @param date The date string to extract the hour from
- * @return The hour in HH:mm format
+ * @param date The date string to extract the hour from.
+ * @return The hour in HH:mm format.
  */
 fun getHour(date: String) : String {
     val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH)
@@ -236,8 +236,8 @@ fun getHour(date: String) : String {
 /**
  * Retrieves the date from a given date string.
  *
- * @param date The date string to extract the date from
- * @return The date in dd/MM/yyyy format
+ * @param date The date string to extract the date from.
+ * @return The date in dd/MM/yyyy format.
  */
 fun getDate(date: String) : String {
     val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH)
@@ -249,8 +249,8 @@ fun getDate(date: String) : String {
 /**
  * Retrieves the list of teams mentioned in a tweet.
  *
- * @param textTweet The content of the tweet
- * @return The list of teams mentioned in the tweet
+ * @param textTweet The content of the tweet.
+ * @return The list of teams mentioned in the tweet.
  */
 fun getEquipes(textTweet: String): List<String> {
     val equipes = Equipes.values().map { it.name }
