@@ -7,128 +7,217 @@ import java.util.*
 
 /**
  * Represents a tweet object.
+ *
+ * @property _id The unique identifier for the tweet.
+ * @property created_at The creation date of the tweet.
+ * @property id The unique ID of the tweet.
+ * @property id_str The string representation of the tweet ID.
+ * @property text The content of the tweet.
+ * @property source The source of the tweet.
+ * @property in_reply_to_status_id The ID of the tweet this tweet is replying to, if any.
+ * @property in_reply_to_status_id_str The string representation of the ID of the tweet this tweet is replying to, if any.
+ * @property in_reply_to_user_id The ID of the user this tweet is replying to, if any.
+ * @property in_reply_to_user_id_str The string representation of the ID of the user this tweet is replying to, if any.
+ * @property user The user who posted the tweet.
+ * @property retweeted_status The retweeted status, if this tweet is a retweet.
+ * @property is_quote_status Indicates if the tweet is a quote status.
+ * @property quote_count The number of times this tweet has been quoted.
+ * @property reply_count The number of replies to this tweet.
+ * @property retweet_count The number of retweets for this tweet.
+ * @property favorite_count The number of times this tweet has been favorited.
+ * @property entities The entities (hashtags, URLs, mentions, etc.) present in the tweet.
+ * @property lang The language of the tweet, if available.
+ * @property hour The hour of the tweet's creation time.
+ * @property date The date of the tweet's creation time.
+ * @property sentiment The sentiment associated with the tweet.
+ * @property equipes The list of teams mentioned in the tweet, if any.
  */
 data class Tweet(
-    val _id: ObjectId = ObjectId.get(),                   // The unique identifier for the tweet
-    val created_at: String,                                // The creation date of the tweet
-    val id: Long,                                          // The unique ID of the tweet
-    val id_str: String,                                    // The string representation of the tweet ID
-    val text: String,                                      // The content of the tweet
-    val source: String,                                    // The source of the tweet
-    val in_reply_to_status_id: Any?,                       // The ID of the tweet this tweet is replying to, if any
-    val in_reply_to_status_id_str: Any?,                   // The string representation of the ID of the tweet this tweet is replying to, if any
-    val in_reply_to_user_id: Any?,                         // The ID of the user this tweet is replying to, if any
-    val in_reply_to_user_id_str: Any?,                     // The string representation of the ID of the user this tweet is replying to, if any
-    val user: FilteredUser,                                // The user who posted the tweet
-    val retweeted_status: FilteredRetweetedStatus? = null, // The retweeted status, if this tweet is a retweet
-    val is_quote_status: Boolean,                          // Indicates if the tweet is a quote status
-    val quote_count: Int,                                  // The number of times this tweet has been quoted
-    val reply_count: Int,                                  // The number of replies to this tweet
-    val retweet_count: Int,                                // The number of retweets for this tweet
-    val favorite_count: Int,                               // The number of times this tweet has been favorited
-    val entities: Entities,                                // The entities (hashtags, URLs, mentions, etc.) present in the tweet
-    val lang: String? = null,                              // The language of the tweet, if available
-    val hour: String? = getHour(created_at),               // The hour of the tweet's creation time
-    val date: String? = getDate(created_at),               // The date of the tweet's creation time
-    val sentiment: String? = null,                         // The sentiment associated with the tweet
-    val equipes: List<String>? = getEquipes(text),          // The list of teams mentioned in the tweet, if any
-
+    val _id: ObjectId = ObjectId.get(),
+    val created_at: String,
+    val id: Long,
+    val id_str: String,
+    val text: String,
+    val source: String,
+    val in_reply_to_status_id: Any?,
+    val in_reply_to_status_id_str: Any?,
+    val in_reply_to_user_id: Any?,
+    val in_reply_to_user_id_str: Any?,
+    val user: FilteredUser,
+    val retweeted_status: FilteredRetweetedStatus? = null,
+    val is_quote_status: Boolean,
+    val quote_count: Int,
+    val reply_count: Int,
+    val retweet_count: Int,
+    val favorite_count: Int,
+    val entities: Entities,
+    val lang: String? = null,
+    val hour: String? = getHour(created_at),
+    val date: String? = getDate(created_at),
+    val sentiment: String? = null,
+    val equipes: List<String>? = getEquipes(text)
 )
 
 /**
  * Represents a filtered user object.
+ *
+ * @property id The unique ID of the user.
+ * @property id_str The string representation of the user ID.
+ * @property name The name of the user.
+ * @property screen_name The screen name/handle of the user.
+ * @property url The URL associated with the user, if available.
+ * @property description The description of the user, if available.
+ * @property verified Indicates if the user is a verified account.
+ * @property followers_count The number of followers the user has.
+ * @property friends_count The number of users the user is following.
+ * @property listed_count The number of lists the user is a member of.
+ * @property favourites_count The number of tweets the user has favorited.
+ * @property statuses_count The number of tweets/statuses the user has posted.
+ * @property created_at The creation date of the user's account.
+ * @property lang The language preference of the user, if available.
+ * @property date The date of the user's account creation.
  */
 data class FilteredUser(
-    val id: Long,                                          // The unique ID of the user
-    val id_str: String,                                    // The string representation of the user ID
-    val name: String,                                      // The name of the user
-    val screen_name: String,                               // The screen name/handle of the user
-    val url: String? = null,                               // The URL associated with the user, if available
-    val description: String? = null,                       // The description of the user, if available
-    val verified: Boolean,                                 // Indicates if the user is a verified account
-    val followers_count: Int,                              // The number of followers the user has
-    val friends_count: Int,                                // The number of users the user is following
-    val listed_count: Int,                                 // The number of lists the user is a member of
-    val favourites_count: Int,                             // The number of tweets the user has favorited
-    val statuses_count: Int,                               // The number of tweets/statuses the user has posted
-    val created_at: String,                                // The creation date of the user's account
-    val lang: Any?,                                        // The language preference of the user, if available
-    val date: String? = getDate(created_at),               // The date of the user's account creation
+    val id: Long,
+    val id_str: String,
+    val name: String,
+    val screen_name: String,
+    val url: String? = null,
+    val description: String? = null,
+    val verified: Boolean,
+    val followers_count: Int,
+    val friends_count: Int,
+    val listed_count: Int,
+    val favourites_count: Int,
+    val statuses_count: Int,
+    val created_at: String,
+    val lang: Any?,
+    val date: String? = getDate(created_at)
 )
 
 /**
  * Represents a filtered retweeted status object.
+ *
+ * @property created_at The creation date of the retweeted status
+ * @property id The unique ID of the retweeted status
+ * @property id_str The string representation of the retweeted status ID
+ * @property text The content of the retweeted status
+ * @property display_text_range The range of the display text, if available
+ * @property source The source of the retweeted status
+ * @property in_reply_to_status_id The ID of the tweet this retweeted status is replying to, if any
+ * @property in_reply_to_status_id_str The string representation of the ID of the tweet this retweeted status is replying to, if any
+ * @property in_reply_to_user_id The ID of the user this retweeted status is replying to, if any
+ * @property in_reply_to_user_id_str The string representation of the ID of the user this retweeted status is replying to, if any
+ * @property user The user who posted the retweeted status
+ * @property is_quote_status Indicates if the retweeted status is a quote status
+ * @property quote_count The number of times the retweeted status has been quoted
+ * @property reply_count The number of replies to the retweeted status
+ * @property retweet_count The number of retweets for the retweeted status
+ * @property favorite_count The number of times the retweeted status has been favorited
+ * @property entities The entities (hashtags, URLs, mentions, etc.) present in the retweeted status
+ * @property favorited Indicates if the retweeted status has been favorited
+ * @property retweeted Indicates if the retweeted status has been retweeted
+ * @property possibly_sensitive Indicates if the retweeted status may contain sensitive content
+ * @property filter_level The filter level applied to the retweeted status
+ * @property lang The language of the retweeted status
+ * @property hour The hour of the retweeted status' creation time
+ * @property date The date of the retweeted status' creation time
  */
 data class FilteredRetweetedStatus(
-    val created_at: String,                                // The creation date of the retweeted status
-    val id: Long,                                          // The unique ID of the retweeted status
-    val id_str: String,                                    // The string representation of the retweeted status ID
-    val text: String,                                      // The content of the retweeted status
-    val display_text_range: List<Int>? = null,             // The range of the display text, if available
-    val source: String,                                    // The source of the retweeted status
-    val in_reply_to_status_id: Any?,                       // The ID of the tweet this retweeted status is replying to, if any
-    val in_reply_to_status_id_str: Any?,                   // The string representation of the ID of the tweet this retweeted status is replying to, if any
-    val in_reply_to_user_id: Any?,                         // The ID of the user this retweeted status is replying to, if any
-    val in_reply_to_user_id_str: Any?,                     // The string representation of the ID of the user this retweeted status is replying to, if any
-    val user: FilteredUser,                                // The user who posted the retweeted status
-    val is_quote_status: Boolean,                          // Indicates if the retweeted status is a quote status
-    val quote_count: Int,                                  // The number of times the retweeted status has been quoted
-    val reply_count: Int,                                  // The number of replies to the retweeted status
-    val retweet_count: Int,                                // The number of retweets for the retweeted status
-    val favorite_count: Int,                               // The number of times the retweeted status has been favorited
-    val entities: Entities,                                // The entities (hashtags, URLs, mentions, etc.) present in the retweeted status
-    val favorited: Boolean,                                // Indicates if the retweeted status has been favorited
-    val retweeted: Boolean,                                // Indicates if the retweeted status has been retweeted
-    val possibly_sensitive: Boolean,                       // Indicates if the retweeted status may contain sensitive content
-    val filter_level: String,                              // The filter level applied to the retweeted status
-    val lang: String,                                      // The language of the retweeted status
-    val hour: String? = getHour(created_at),               // The hour of the retweeted status' creation time
-    val date: String? = getDate(created_at),               // The date of the retweeted status' creation time
+    val created_at: String,
+    val id: Long,
+    val id_str: String,
+    val text: String,
+    val display_text_range: List<Int>? = null,
+    val source: String,
+    val in_reply_to_status_id: Any?,
+    val in_reply_to_status_id_str: Any?,
+    val in_reply_to_user_id: Any?,
+    val in_reply_to_user_id_str: Any?,
+    val user: FilteredUser,
+    val is_quote_status: Boolean,
+    val quote_count: Int,
+    val reply_count: Int,
+    val retweet_count: Int,
+    val favorite_count: Int,
+    val entities: Entities,
+    val favorited: Boolean,
+    val retweeted: Boolean,
+    val possibly_sensitive: Boolean,
+    val filter_level: String,
+    val lang: String,
+    val hour: String? = getHour(created_at),
+    val date: String? = getDate(created_at)
 )
 
 /**
- * Represents a entities object.
+ * Represents an entities object.
+ *
+ * @property hashtags The list of hashtags present in the tweet
+ * @property urls The list of URLs present in the tweet
+ * @property user_mentions The list of user mentions present in the tweet
+ * @property symbols The list of symbols present in the tweet
+ * @property media The list of media (images, videos, etc.) present in the tweet
  */
 data class Entities(
-    val hashtags: List<Hashtag>,                           // The list of hashtags present in the tweet
-    val urls: List<Any>,                                   // The list of URLs present in the tweet
-    val user_mentions: List<UserMention>,                   // The list of user mentions present in the tweet
-    val symbols: List<Any>,                                // The list of symbols present in the tweet
-    val media: List<Media> = emptyList(),                   // The list of media (images, videos, etc.) present in the tweet
+    val hashtags: List<Hashtag>,
+    val urls: List<Any>,
+    val user_mentions: List<UserMention>,
+    val symbols: List<Any>,
+    val media: List<Media> = emptyList()
 )
 
 /**
  * Represents a hashtag object.
+ *
+ * @property indices The character indices where the hashtag appears in the tweet
+ * @property text The text of the hashtag
  */
 data class Hashtag(
-    val indices: List<Int>,                                // The character indices where the hashtag appears in the tweet
-    val text: String                                       // The text of the hashtag
+    val indices: List<Int>,
+    val text: String
 )
 
 /**
  * Represents a user mention object.
+ *
+ * @property screen_name The screen name/handle of the mentioned user
+ * @property name The name of the mentioned user
+ * @property id The unique ID of the mentioned user
+ * @property id_str The string representation of the mentioned user ID
+ * @property indices The character indices where the user mention appears in the tweet
  */
 data class UserMention(
-    val screen_name: String? = null,                       // The screen name/handle of the mentioned user
-    val name: String? = null,                              // The name of the mentioned user
-    val id: Long? = null,                                  // The unique ID of the mentioned user
-    val id_str: String? = null,                            // The string representation of the mentioned user ID
-    val indices: List<Int>? = null,                        // The character indices where the user mention appears in the tweet
+    val screen_name: String? = null,
+    val name: String? = null,
+    val id: Long? = null,
+    val id_str: String? = null,
+    val indices: List<Int>? = null
 )
 
 /**
  * Represents a media object.
+ *
+ * @property id The unique ID of the media
+ * @property id_str The string representation of the media ID
+ * @property indices The character indices where the media appears in the tweet
+ * @property media_url The URL of the media
+ * @property media_url_https The HTTPS URL of the media
+ * @property url The displayed URL of the media
+ * @property display_url The displayed URL of the media with formatting
+ * @property expanded_url The expanded version of the displayed URL
+ * @property type The type of the media (e.g., photo, video)
  */
 data class Media(
-    val id: Long,                                          // The unique ID of the media
-    val id_str: String,                                    // The string representation of the media ID
-    val indices: List<Int>,                                // The character indices where the media appears in the tweet
-    val media_url: String,                                 // The URL of the media
-    val media_url_https: String,                           // The HTTPS URL of the media
-    val url: String,                                       // The displayed URL of the media
-    val display_url: String,                               // The displayed URL of the media with formatting
-    val expanded_url: String,                              // The expanded version of the displayed URL
-    val type: String,                                      // The type of the media (e.g., photo, video)
+    val id: Long,
+    val id_str: String,
+    val indices: List<Int>,
+    val media_url: String,
+    val media_url_https: String,
+    val url: String,
+    val display_url: String,
+    val expanded_url: String,
+    val type: String
 )
 
 /**
