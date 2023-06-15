@@ -6,6 +6,10 @@ import java.io.InputStreamReader
 
 import java.util.concurrent.atomic.AtomicInteger
 
+
+/**
+ * The main entry point of the MongoJava application.
+ */
 fun main() {
     val loader = MongoLoader()
     val targetDirectory = File("C:\\Users\\emili\\Documents\\M2\\big_data\\data_Twitter\\data")
@@ -19,6 +23,13 @@ fun main() {
     executePythonScriptsInDirectory("src/main/resources/requetes_pipelines")
 }
 
+/**
+ * Processes the list of files by loading JSON data into the MongoDB database.
+ *
+ * @param loader The instance of MongoLoader used for loading data into the database
+ * @param files The list of files to be processed
+ * @param index The AtomicInteger to keep track of the file index being processed
+ */
 fun processFiles(loader: MongoLoader, files: List<File>, index: AtomicInteger) {
     files.parallelStream().forEach { file ->
         loader.loadJsonIntoDb(file)
@@ -28,6 +39,10 @@ fun processFiles(loader: MongoLoader, files: List<File>, index: AtomicInteger) {
     println("All files treated.")
 }
 
+/**
+ * Executes the sentiment analyzer Python script.
+ * The script is expected to be located at "src/main/resources/sentiment-analyzer.py".
+ */
 fun executeSentimentAnalyzer() {
     val process = ProcessBuilder("python", "src/main/resources/sentiment-analyzer.py")
         .redirectErrorStream(true)
@@ -43,6 +58,11 @@ fun executeSentimentAnalyzer() {
     println("Python sentiment analyzer script execution completed. Exit code: $exitCode")
 }
 
+/**
+ * Executes Python scripts located in a specific directory.
+ *
+ * @param directoryPath The path to the directory containing the Python scripts
+ */
 fun executePythonScriptsInDirectory(directoryPath: String) {
     val directory = File(directoryPath)
 
